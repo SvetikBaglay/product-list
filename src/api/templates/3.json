@@ -1,0 +1,6 @@
+{
+  "id": "3",
+  "name": "Three",
+  "template": "<div class='template'><div class='editable'>One</div><div class='container'><div class='editable'>Two</div><div class='editable'>Three</div></div></div>",
+  "modified": 1516008564742
+}
