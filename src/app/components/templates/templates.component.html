@@ -1,20 +1,22 @@
-<div class="table-responsive">
-  <table class="table table-bordered table-hover">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Modified</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor='let template of templates'>
-        <td>{{template.id}}</td>
-        <td>
-          <a [routerLink]="['/templates', template.id]">{{template.name}}</a>
-        </td>
-        <td>{{template.modified | date:'medium'}}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container my-3">
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Modified</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let template of templates'>
+          <td>{{template.id}}</td>
+          <td>
+            <a [routerLink]="['/templates', template.id]">{{template.name}}</a>
+          </td>
+          <td>{{template.modified | date:'medium'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

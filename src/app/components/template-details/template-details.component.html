@@ -1,11 +1,15 @@
-<div class="template">
+<div class="container my-3">
   <a routerLink="/templates">Back</a>
-  <dl>
-    <dt>Name</dt>
-    <dd>{{template.name}}</dd>
-    <dt>Content</dt>
-    <dd>{{template.template}}</dd>
-    <dt>Modified</dt>
-    <dd>{{template.modified | date:'medium'}}</dd>
-  </dl>
+  <form #form="ngForm">
+    <div class="form-group col-md my-2">
+      <label for="name">Name</label>
+      <input id="name" class="form-control my-2" name="name" [(ngModel)]="template.name" required />
+    </div>
+    <button class="btn btn-primary my-2">Save</button>
+  </form>
+  <dt>Content</dt>
+  <dd [innerHTML]="template.template"></dd>
+  <dt>Modified</dt>
+  <dd>{{template.modified | date:'medium'}}</dd>
 </div>
+<app-panel *ngIf="this.selectedText.length" text={{this.selectedText}} handleSave={{this.handleTemplateUpdate}}></app-panel>
