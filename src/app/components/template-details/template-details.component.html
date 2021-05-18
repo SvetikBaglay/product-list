@@ -1,9 +1,11 @@
-<a routerLink="/templates">Back</a>
-<dl>
-  <dt>Name</dt>
-  <dd>{{template.name}}</dd>
-  <dt>Content</dt>
-  <dd>{{template.template}}</dd>
-  <dt>Modified</dt>
-  <dd>{{template.modified}}</dd>
-</dl>
+<div class="template">
+  <a routerLink="/templates">Back</a>
+  <dl>
+    <dt>Name</dt>
+    <dd>{{template.name}}</dd>
+    <dt>Content</dt>
+    <dd>{{template.template}}</dd>
+    <dt>Modified</dt>
+    <dd>{{template.modified | date:'medium'}}</dd>
+  </dl>
+</div>
