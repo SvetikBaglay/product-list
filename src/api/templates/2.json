@@ -1,6 +1,6 @@
 {
   "id": "2",
   "name": "Two",
-  "template": "<div class='template'><div class='editable'>One</div><div class='container'><div class='editable'>Two</div><div class='editable'>Three</div></div></div>",
+  "template": "",
   "modified": 1516008489616
 }

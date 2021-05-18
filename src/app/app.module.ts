@@ -7,20 +7,25 @@ import { AppComponent } from './app.component';
 import { TemplatesComponent } from './components/templates/templates.component';
 import { RouterModule } from '@angular/router';
 import { TemplateDetailsComponent } from './components/template-details/template-details.component';
+import { FormsModule } from '@angular/forms';
+import { PanelComponent } from './components/panel/panel.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     TemplatesComponent,
     TemplateDetailsComponent,
+    PanelComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'templates', component: TemplatesComponent },
-      { path: 'templates/:id', component: TemplateDetailsComponent},
+      { path: 'templates/:id', component: TemplateDetailsComponent },
       { path: '**', redirectTo: 'templates', pathMatch: 'full'},
     ])
   ],
