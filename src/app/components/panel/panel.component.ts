@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import {Subject}  from 'rxjs';
 
 @Component({
   selector: 'app-panel',
@@ -7,12 +8,21 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 
 export class PanelComponent implements OnInit {
-  @Input() textType = '';
-  constructor() { }
+  @Input() text: string;
 
-  ngOnInit(): void {
-
+  fsSubject = new Subject();
+  fsValue = 'fs-12';
+  constructor() {
+    this.fsSubject.subscribe((value:any) => {
+      this.fsValue = ~value.indexOf('fs-') ? value : `fs-${value}`;
+    })
   }
+
+  fsChanged(event) {
+    this.fsSubject.next((event.target.value || 12));
+  }
+
+  ngOnInit(){}
 
 
 }

@@ -12,4 +12,4 @@
   <dt>Modified</dt>
   <dd>{{template.modified | date:'medium'}}</dd>
 </div>
-<app-panel *ngIf="this.selectedText.length" text={{this.selectedText}} handleSave={{this.handleTemplateUpdate}}></app-panel>
+<app-panel *ngIf="this.selectedText.length" [text]="this.selectedText" handleSave={{this.handleTemplateUpdate}}></app-panel>

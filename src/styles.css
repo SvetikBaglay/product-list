@@ -2,7 +2,14 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~font-awesome/css/font-awesome.min.css";
 
-/* .table-responsive {
-  margin: 20px;
-} */
+.fs-12 {
+  font-size: 12px;
 
+}
+.fs-20 {
+  font-size: 20px;
+
+}
+.fs-22 {
+  font-size: 22px;
+  }
