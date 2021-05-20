@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {Subject}  from 'rxjs';
+import * as EventEmitter from 'events';
 
 @Component({
   selector: 'app-panel',
@@ -9,20 +9,30 @@ import {Subject}  from 'rxjs';
 
 export class PanelComponent implements OnInit {
   @Input() text: string;
+  @Input() handleSave: (s: string) => void;
 
-  fsSubject = new Subject();
-  fsValue = 'fs-12';
-  constructor() {
-    this.fsSubject.subscribe((value:any) => {
-      this.fsValue = ~value.indexOf('fs-') ? value : `fs-${value}`;
-    })
+  fontSize: string = "12";
+  fontText: string = "One";
+
+  handleFontSizeChange(e: InputEvent): void {
+    this.fontSize = ((e.target as HTMLInputElement).value);
   }
 
-  fsChanged(event) {
-    this.fsSubject.next((event.target.value || 12));
+  handleTextChange(e: InputEvent): void {
+    this.fontText = ((e.target as HTMLInputElement).value);
   }
 
-  ngOnInit(){}
+  finalString(fontSize:string, fontText:string) {
+    return `<div style="fornt-size: ${fontSize}px;">${fontText}</div>`;
+  }
 
+  handleTemplateStringSave(e: MouseEvent): void {
+    //console.log('handleSave: ', this.handleSave);
+    const finaleTextSave = this.finalString(this.fontSize, this.fontText);
+    this.handleSave(finaleTextSave);
+  }
 
+  ngOnInit() {
+    this.fontText = this.text;
+  }
 }

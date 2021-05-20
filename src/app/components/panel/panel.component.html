@@ -1,11 +1,12 @@
 <div class="editpanel p-5">
   <div>
-    <input id="template" text="text" [value]="text" [ngClass]="fsValue"/>
-    <select (change)="fsChanged($event)" name="template" id="template" class="py-1" [ngClass]="fsValue">
-      <option value="12">12 px</option>
-      <option value="20">20 px</option>
-      <option value="22">22 px</option>
+    <input (input)="handleTextChange($event)" id="template" text="text" [value]="text" />
+    <select (change)="handleFontSizeChange($event)" name="template" id="template" class="py-1">
+      <option value="12">12px</option>
+      <option value="20">20px</option>
+      <option value="22">22px</option>
     </select>
   </div>
-  <button class="btn btn-primary my-2 px-4">Ok</button>
+  <button type="button" (click)="handleTemplateStringSave($event)"
+            class="btn btn-primary my-2 px-4">Ok</button>
 </div>

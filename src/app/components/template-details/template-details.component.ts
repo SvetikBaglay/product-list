@@ -16,6 +16,7 @@ export class TemplateDetailsComponent implements OnInit {
   errorMessage = "";
   template: ITemplate | null;
   selectedText: string = "";
+  saveText: string = "";
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -40,5 +41,10 @@ export class TemplateDetailsComponent implements OnInit {
       return;
     }
     this.selectedText = "";
+  }
+
+  handleTemplateUpdate(saveText: string) {
+    this.saveText = saveText;
+    console.log('saved text: ', this.saveText);
   }
 }

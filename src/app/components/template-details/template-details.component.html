@@ -3,7 +3,7 @@
   <form #form="ngForm">
     <div class="form-group col-md my-2">
       <label for="name">Name</label>
-      <input id="name" class="form-control my-2" name="name" [(ngModel)]="template.name" required />
+      <input id="name" name="name" class="form-control my-2" [(ngModel)]="template.name" required />
     </div>
     <button class="btn btn-primary my-2">Save</button>
   </form>
@@ -12,4 +12,5 @@
   <dt>Modified</dt>
   <dd>{{template.modified | date:'medium'}}</dd>
 </div>
-<app-panel *ngIf="this.selectedText.length" [text]="this.selectedText" handleSave={{this.handleTemplateUpdate}}></app-panel>
+<app-panel *ngIf="this.selectedText.length" text={{this.selectedText}}
+            [handleSave]="handleTemplateUpdate"></app-panel>
