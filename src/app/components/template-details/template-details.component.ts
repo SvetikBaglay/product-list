@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, SecurityContext } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TemplatesService, ITemplate } from '../../services/templates.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Template } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-template-details',
@@ -8,7 +10,8 @@ import { TemplatesService, ITemplate } from '../../services/templates.service';
   styleUrls: ['./template-details.component.css'],
   host: {
     '(document:mouseup)': 'handleMouseUp($event)'
-  }
+  },
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class TemplateDetailsComponent implements OnInit {
@@ -17,10 +20,14 @@ export class TemplateDetailsComponent implements OnInit {
   template: ITemplate | null;
   selectedText: string = "";
   saveText: string = "";
+  templateText: string = "";
+
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private templatesService: TemplatesService) {}
+    private templatesService: TemplatesService,
+    private sanitizer: DomSanitizer
+  ) { }
 
   ngOnInit(): void {
     const param = this.route.snapshot.paramMap.get('id');
@@ -28,7 +35,10 @@ export class TemplateDetailsComponent implements OnInit {
     if (param) {
       const id = +param;
       this.templatesService.getTemplate(id).subscribe({
-        next: template => this.template = template,
+        next: template => {
+          this.template = template
+          this.templateText = template.template;
+        },
         error: (resp) => this.errorMessage = resp
       })
     }
@@ -43,8 +53,25 @@ export class TemplateDetailsComponent implements OnInit {
     this.selectedText = "";
   }
 
-  handleTemplateUpdate(saveText: string) {
-    this.saveText = saveText;
-    console.log('saved text: ', this.saveText);
+  sanitizedText() {
+    return this.sanitizer.sanitize(SecurityContext.HTML, this.sanitizer.bypassSecurityTrustHtml(this.templateText));
   }
+
+  changeTemplateText(selectedText: string, saveText: string, template: ITemplate): string {
+    let tmpl = template.template;
+    let textIndex = tmpl.indexOf(selectedText);
+    let textSubstr = tmpl.substring(0, textIndex);
+    let selectedTextLength = selectedText.length;
+    let textAnotherFinish = tmpl.substring(textIndex + selectedTextLength);
+
+    return textSubstr + saveText + textAnotherFinish;
+  }
+
+  handleTemplateUpdate = (saveText: string): void => {
+    this.saveText = saveText;
+
+    this.templateText = this.changeTemplateText(this.selectedText, this.saveText, this.template);
+  }
+
 }
+

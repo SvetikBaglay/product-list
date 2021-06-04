@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { TemplateDetailsComponent } from './components/template-details/template-details.component';
 import { FormsModule } from '@angular/forms';
 import { PanelComponent } from './components/panel/panel.component';
+import { SafeHtmlPipe } from './safe-html.pipe';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { PanelComponent } from './components/panel/panel.component';
     TemplatesComponent,
     TemplateDetailsComponent,
     PanelComponent,
+    SafeHtmlPipe,
   ],
   imports: [
     BrowserModule,

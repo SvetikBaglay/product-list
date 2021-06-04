@@ -3,12 +3,12 @@
   <form #form="ngForm">
     <div class="form-group col-md my-2">
       <label for="name">Name</label>
-      <input id="name" name="name" class="form-control my-2" [(ngModel)]="template.name" required />
+      <input id="name" type="text" name="name" class="form-control my-2" [(ngModel)]="template.name" required />
     </div>
     <button class="btn btn-primary my-2">Save</button>
   </form>
   <dt>Content</dt>
-  <dd [innerHTML]="template.template"></dd>
+  <dd [innerHTML]="sanitizedText() | safeHtml"></dd>
   <dt>Modified</dt>
   <dd>{{template.modified | date:'medium'}}</dd>
 </div>

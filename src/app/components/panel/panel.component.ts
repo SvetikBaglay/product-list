@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import * as EventEmitter from 'events';
+import { Component, Input, OnInit, SecurityContext } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-panel',
@@ -10,6 +10,10 @@ import * as EventEmitter from 'events';
 export class PanelComponent implements OnInit {
   @Input() text: string;
   @Input() handleSave: (s: string) => void;
+
+  constructor(
+    private sanitizer: DomSanitizer
+  ) { }
 
   fontSize: string = "12";
   fontText: string = "One";
@@ -22,12 +26,13 @@ export class PanelComponent implements OnInit {
     this.fontText = ((e.target as HTMLInputElement).value);
   }
 
-  finalString(fontSize:string, fontText:string) {
-    return `<div style="fornt-size: ${fontSize}px;">${fontText}</div>`;
+  finalString(fontSize: string, fontText: string) {
+    const style = this.sanitizer.sanitize(SecurityContext.STYLE, this.sanitizer.bypassSecurityTrustStyle(`font-size: ${fontSize}px`));
+
+    return `<span style=\"${style}\">${fontText}</span>`;
   }
 
   handleTemplateStringSave(e: MouseEvent): void {
-    //console.log('handleSave: ', this.handleSave);
     const finaleTextSave = this.finalString(this.fontSize, this.fontText);
     this.handleSave(finaleTextSave);
   }
