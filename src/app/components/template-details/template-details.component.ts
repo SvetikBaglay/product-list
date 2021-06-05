@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation, SecurityContext } from '@angular/
 import { ActivatedRoute, Router } from '@angular/router';
 import { TemplatesService, ITemplate } from '../../services/templates.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Template } from '@angular/compiler/src/render3/r3_ast';
+
 
 @Component({
   selector: 'app-template-details',
@@ -12,12 +12,13 @@ import { Template } from '@angular/compiler/src/render3/r3_ast';
     '(document:mouseup)': 'handleMouseUp($event)'
   },
   encapsulation: ViewEncapsulation.None,
+
 })
 
 export class TemplateDetailsComponent implements OnInit {
   pageTitle = "Template Detail";
   errorMessage = "";
-  template: ITemplate | null;
+  template: ITemplate = { name: '' };
   selectedText: string = "";
   saveText: string = "";
   templateText: string = "";
@@ -34,13 +35,8 @@ export class TemplateDetailsComponent implements OnInit {
 
     if (param) {
       const id = +param;
-      this.templatesService.getTemplate(id).subscribe({
-        next: template => {
-          this.template = template
-          this.templateText = template.template;
-        },
-        error: (resp) => this.errorMessage = resp
-      })
+      this.template = this.templatesService.getTemplate(id);
+      this.templateText = this.template.template;
     }
   }
 
@@ -71,6 +67,16 @@ export class TemplateDetailsComponent implements OnInit {
     this.saveText = saveText;
 
     this.templateText = this.changeTemplateText(this.selectedText, this.saveText, this.template);
+  }
+
+  updateSaveNew(e: MouseEvent): void {
+    newTemplate {
+        id: number,
+        name: "",
+        template: "",
+        modified: number
+    }
+    this.templatesService.update(this.template);
   }
 
 }

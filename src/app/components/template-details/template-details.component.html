@@ -3,9 +3,9 @@
   <form #form="ngForm">
     <div class="form-group col-md my-2">
       <label for="name">Name</label>
-      <input id="name" type="text" name="name" class="form-control my-2" [(ngModel)]="template.name" required />
+      <input id="name" type="text" name="name" class="form-control my-2" [(ngModel)]="template.name" />
     </div>
-    <button class="btn btn-primary my-2">Save</button>
+    <button class="btn btn-primary my-2" (click)="updateSaveNew($event)">Save</button>
   </form>
   <dt>Content</dt>
   <dd [innerHTML]="sanitizedText() | safeHtml"></dd>
