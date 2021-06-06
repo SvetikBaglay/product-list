@@ -70,13 +70,13 @@ export class TemplateDetailsComponent implements OnInit {
   }
 
   updateSaveNew(e: MouseEvent): void {
-    newTemplate {
-        id: number,
-        name: "",
-        template: "",
-        modified: number
-    }
-    this.templatesService.update(this.template);
+    let newTemplate = {
+      id: this.template.id,
+      name: this.template.name,
+      template: this.templateText,
+      modified: +new Date()
+    };
+    this.templatesService.update(newTemplate)
   }
 
 }

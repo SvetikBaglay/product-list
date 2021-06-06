@@ -23,26 +23,28 @@ export class TemplatesService {
   }
 
   getTemplates(): ITemplate[] {
-    this.templates = [
-      {
-        id: 1,
-        name: "One",
-        template: "<div class='template'><div class='editable'>One</div><div class='container'><div class='editable'>Two</div><div class='editable'>Three</div></div></div>",
-        modified: 1516008350380
-      },
-      {
-        id: 2,
-        name: "Two",
-        template: "<div class='template'><div class='editable'>One</div><div class='container'><div class='editable'>Two</div><div class='editable'>Three</div></div></div>",
-        modified: 1516008489616
-      },
-      {
-        id: 3,
-        name: "Three",
-        template: "<div class='template'><div class='editable'>One</div><div class='container'><div class='editable'>Two</div><div class='editable'>Three</div></div></div>",
-        modified: 1516008564742
-      }
-    ];
+    if (this.templates.length === 0) {
+      this.templates = [
+        {
+          id: 1,
+          name: "One",
+          template: "<div class='template'><div class='editable'>One</div><div class='container'><div class='editable'>Two</div><div class='editable'>Three</div></div></div>",
+          modified: 1516008350380
+        },
+        {
+          id: 2,
+          name: "Two",
+          template: "<div class='template'><div class='editable'>One</div><div class='container'><div class='editable'>Two</div><div class='editable'>Three</div></div></div>",
+          modified: 1516008489616
+        },
+        {
+          id: 3,
+          name: "Three",
+          template: "<div class='template'><div class='editable'>One</div><div class='container'><div class='editable'>Two</div><div class='editable'>Three</div></div></div>",
+          modified: 1516008564742
+        }
+      ];
+    }
 
     return this.templates;
   }
@@ -57,9 +59,8 @@ export class TemplatesService {
         continue
       }
     }
-    console.log("newArr: ", newArrTemplate);
-
-    return newArrTemplate.push(template);
+    newArrTemplate.push(template);
+    this.templates = newArrTemplate;
   }
 }
 
