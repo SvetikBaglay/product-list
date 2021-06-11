@@ -10,6 +10,7 @@ import { TemplateDetailsComponent } from './components/template-details/template
 import { FormsModule } from '@angular/forms';
 import { PanelComponent } from './components/panel/panel.component';
 import { SafeHtmlPipe } from './safe-html.pipe';
+import {APP_BASE_HREF} from '@angular/common';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { SafeHtmlPipe } from './safe-html.pipe';
       { path: '**', redirectTo: 'templates', pathMatch: 'full'},
     ])
   ],
-  providers: [],
+  providers: [{provide: APP_BASE_HREF, useValue: '/product-list/'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
